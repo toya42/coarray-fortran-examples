@@ -7,26 +7,33 @@ assignees: toya42
 
 ---
 
-## Is your feature request related to a problem? Please describe. (現時点での問題とそれを解決する機能拡張の提案)
+## Please read this section before you create an issue
 
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+- 下記事項を記入してください．該当しない場合は空白にしてください
+- 本セクション，及び各セクションの説明は issue 投稿前に削除してください
+- 箇条書きやコードブロックなど Markdown の記法を適宜使用してください
 
-どんな点が不満・不十分かを明確に説明してください
+## The reason WHY this new feature is needed
 
-## Describe the solution you'd like  (望ましい動作)
+- あなたが提案する機能がなぜ必要なのか説明してください
+- あるいは，提案する機能によって既存の問題がどのように解決されるかを説明してください
 
-A clear and concise description of what you want to happen.
+## Describe WHAT this new feature is
 
-あなたはこのプログラムがどのように動作すべきだと考えていますか？簡潔に説明してください
+新しい機能，あるいは既存の問題を解決する手段について簡潔に説明してください
 
-## Describe alternatives you've considered (あなたが考える解決策)
+## HOW to achieve this new feature
 
-A clear and concise description of any alternative solutions or features you've considered.
+- 新しい機能をどのように実装すべきか，について既に考えがあればここで説明してください
+- 新しい機能を実装するためのタスクリストを作ってください
+  - [] TASK1
+  - [] TASK2
+  - [] TASK3
 
-あなたは上記を達成するために，どのような改修を行えばよいと考えていますか？簡潔に説明してください
+## Related issues
+- Parent issue
+    - 親 issue がある場合は記入してください (e.g.  \#1234)
+- Related issue
+    - 関連 issue がある場合は記入してください (e.g.  \#1234)
 
-## Additional context (追記・特記事項)
-
-Add any other context or screenshots about the feature request here.
-
-改修案について，上記以外に特筆すべきことがあれば記入してください
+## Additional context
