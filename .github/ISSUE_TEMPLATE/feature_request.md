@@ -26,9 +26,9 @@ assignees: toya42
 
 - 新しい機能をどのように実装すべきか，について既に考えがあればここで説明してください
 - 新しい機能を実装するためのタスクリストを作ってください
-  - [] TASK1
-  - [] TASK2
-  - [] TASK3
+  - [ ] TASK1
+  - [ ] TASK2
+  - [ ] TASK3
 
 ## Related issues
 - Parent issue
