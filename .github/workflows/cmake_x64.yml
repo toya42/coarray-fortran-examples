@@ -30,7 +30,7 @@ jobs:
             artifact_name: main_mac_darwin.tgz
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Configure CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -46,30 +46,3 @@ jobs:
         # Execute tests defined by the CMake configuration.
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ctest -C ${{env.BUILD_TYPE}}
-
-    - name: Package
-      shell: bash
-      run: |
-        ls  '${{github.workspace}}/build'
-        if [[ "${{ matrix.os }}" == "windows-latest" ]]
-        then
-          7z a ${{ matrix.artifact_name }} '${{github.workspace}}/build/Release/${{ matrix.exe_name }}'
-        else
-          tar czvf ${{ matrix.artifact_name }} ${{github.workspace}}/build/${{ matrix.exe_name }}
-        fi
-        ls
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.artifact_name }}
-        path: ${{ matrix.artifact_name }}
-
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        body_path: CHANGELOG.md
-        files: |
-          ${{ matrix.artifact_name }}
-          LICENSE
-          NOTICE.md
