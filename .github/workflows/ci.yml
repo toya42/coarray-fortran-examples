@@ -1,6 +1,6 @@
 name: CI
 
-# this yml file was based on CI.yml of fortranlang/stdlib 
+# this yml file was based on CI.yml of fortranlang/stdlib
 #(https://github.com/fortran-lang/stdlib/blob/master/.github/workflows/CI.yml)
 
 #on: [push, pull_request]
@@ -8,11 +8,11 @@ on:
   push:
     tags: "*"
     branches: ["main"]
-    pull_request:
+  pull_request:
     branches: ["main"]
 
 env:
-  CTEST_TIME_TIMEOUT: "5"  # some failures hang forever
+  CTEST_TIME_TIMEOUT: "5" # some failures hang forever
   HOMEBREW_NO_ANALYTICS: "ON" # Make Homebrew installation a little quicker
   HOMEBREW_NO_AUTO_UPDATE: "ON"
   HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: "ON"
@@ -37,32 +37,32 @@ jobs:
       BUILD_DIR: ${{ matrix.build == 'cmake' && 'build' || '.' }}
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install GCC compilers Linux
-      if: contains( matrix.os, 'ubuntu')
-      run: |
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
-        sudo apt-get install -y gcc-${GCC_V} g++-${GCC_V} gfortran-${GCC_V}
-        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
-        --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
-        --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC_V} \
-        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
+      - name: Install GCC compilers Linux
+        if: contains( matrix.os, 'ubuntu')
+        run: |
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+          sudo apt-get update
+          sudo apt-get install -y gcc-${GCC_V} g++-${GCC_V} gfortran-${GCC_V}
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
+          --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
+          --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC_V} \
+          --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
 
-    - name: Install GCC compilers macOS
-      if: contains( matrix.os, 'macos')
-      run: |
+      - name: Install GCC compilers macOS
+        if: contains( matrix.os, 'macos')
+        run: |
           brew install gcc@${GCC_V} || brew upgrade gcc@${GCC_V} || true
           brew link gcc@${GCC_V}
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
-    - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{env.BUILD_TYPE}}
+      - name: Test
+        working-directory: ${{github.workspace}}/build
+        run: ctest -C ${{env.BUILD_TYPE}}
