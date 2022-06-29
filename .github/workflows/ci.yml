@@ -12,6 +12,7 @@ on:
     branches: ["main"]
 
 env:
+  BUILD_TYPE: Release
   CTEST_TIME_TIMEOUT: "5" # some failures hang forever
   HOMEBREW_NO_ANALYTICS: "ON" # Make Homebrew installation a little quicker
   HOMEBREW_NO_AUTO_UPDATE: "ON"
